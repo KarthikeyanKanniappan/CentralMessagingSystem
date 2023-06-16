@@ -7,4 +7,6 @@ contextBridge.exposeInMainWorld("electronApi", {
   getName: (callback) => ipcRenderer.on("moving-name", callback),
   portClose: (callback) => ipcRenderer.on("close-port", callback),
   received: (callback) => ipcRenderer.on("got", callback),
+  sendMessage: (text) => ipcRenderer.send("sending", text),
+  receivedMessage: (call) => ipcRenderer.on("receiving", call),
 });

@@ -36,10 +36,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow();
-  //   ipcMain.handle("openBox", addMember);
-  //   ipcMain.on("about-name", (event, name) => {
-  //     console.log(name);
-  //   });
+
   ipcMain.on("openBox", (event, name) => {
     let win2 = addMember();
     win2.webContents.on("did-finish-load", () => {
@@ -48,12 +45,13 @@ app.whenReady().then(() => {
   });
 
   ipcMain.on("about-text", (event, text) => {
-    console.log(text);
     win2.webContents.send("got", text);
-    // win2.webContents.on("did-finish-load", () => {
-    //   win2.webContents.send("moving-name", text);
-    // });
   });
+
+  ipcMain.on("sending", (event, value) => {
+    win1.webContents.send("receiving", value);
+  });
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
