@@ -9,4 +9,5 @@ contextBridge.exposeInMainWorld("electronApi", {
   received: (callback) => ipcRenderer.on("got", callback),
   sendMessage: (text) => ipcRenderer.send("sending", text),
   receivedMessage: (call) => ipcRenderer.on("receiving", call),
+  send: (text) => ipcRenderer.send("renderer-closed", text),
 });

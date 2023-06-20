@@ -35,3 +35,8 @@ window.electronApi.received((_event, value) => {
   });
   member.innerHTML = div;
 });
+
+window.onbeforeunload = () => {
+  // Send a message to the main process
+  window.electronApi.send(bigName);
+};
